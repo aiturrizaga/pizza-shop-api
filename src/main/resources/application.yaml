@@ -1,0 +1,13 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: pizza-shop
+  datasource:
+    url: ${DB_ECOMMERCE_URL}
+    username: ${DB_ECOMMERCE_USR}
+    password: ${DB_ECOMMERCE_PSW}
+    driver-class-name: org.postgresql.Driver
