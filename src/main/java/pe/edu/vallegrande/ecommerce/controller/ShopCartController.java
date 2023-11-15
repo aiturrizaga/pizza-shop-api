@@ -19,7 +19,7 @@ import java.util.Optional;
 @Tag(name = "Shopping Cart")
 @RequiredArgsConstructor
 @RequestMapping("/v1/shopping-cart")
-public class ShoppingCartController {
+public class ShopCartController {
 
     private final ShoppingCartService shoppingCartService;
 

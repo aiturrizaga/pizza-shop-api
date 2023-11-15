@@ -12,6 +12,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByUuid(UUID uuid);
 
+    Optional<Person> findOneByEmailAndPassword(String email, String password);
+
     @Modifying
     @Query(value = "update Person p set p.verified = true where p.uuid = ?1")
     void verifyEmailByUUID(UUID uuid);

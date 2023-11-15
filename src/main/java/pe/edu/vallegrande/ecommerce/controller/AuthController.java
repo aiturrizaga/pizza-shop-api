@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pe.edu.vallegrande.ecommerce.model.dto.LoginDTO;
+import org.springframework.web.bind.annotation.*;
+import pe.edu.vallegrande.ecommerce.model.dto.*;
+import pe.edu.vallegrande.ecommerce.service.AuthService;
+
+import java.util.UUID;
 
 @RestController
 @Tag(name = "Authorization")
@@ -16,9 +16,17 @@ import pe.edu.vallegrande.ecommerce.model.dto.LoginDTO;
 @RequestMapping("/v1/auth")
 public class AuthController {
 
+    private final AuthService authService;
+
     @Operation(summary = "User login")
     @PostMapping
-    public ResponseEntity<Object> login(@RequestBody LoginDTO login) {
-        return ResponseEntity.ok("");
+    public ResponseEntity<PersonResponseDTO> login(@RequestBody LoginDTO dto) {
+        return ResponseEntity.ok(authService.login(dto));
+    }
+
+    @Operation(summary = "Verify email")
+    @PostMapping("/verify-email/{uuid}")
+    public ResponseEntity<VerifyEmailDTO> verifyEmail(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(authService.verifyEmail(uuid));
     }
 }

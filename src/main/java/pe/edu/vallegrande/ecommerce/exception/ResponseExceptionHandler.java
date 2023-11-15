@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import pe.edu.vallegrande.ecommerce.model.dto.VerifyEmailDTO;
 
 import java.time.LocalDateTime;
 
@@ -50,5 +51,16 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 .details(request.getDescription(false))
                 .build();
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UnverifiedEmailException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<VerifyEmailDTO> handleUnverifiedEmailException(NotFoundException ex, WebRequest request) {
+        return ResponseEntity.ok(
+                VerifyEmailDTO.builder()
+                        .message(ex.getMessage())
+                        .verified(false)
+                        .build()
+        );
     }
 }
