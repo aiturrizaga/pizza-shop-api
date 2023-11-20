@@ -3,9 +3,11 @@ package pe.edu.vallegrande.ecommerce.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.ProductDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Product;
 import pe.edu.vallegrande.ecommerce.service.ProductService;
@@ -20,6 +22,12 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+
+    @Operation(summary = "Get all products")
+    @GetMapping
+    public ResponseEntity<PageableDTO<Product>> getProduct(Pageable pageable) {
+        return ResponseEntity.ok(productService.findAll(pageable));
+    }
 
     @Operation(summary = "Get product by id")
     @GetMapping("/{id}")

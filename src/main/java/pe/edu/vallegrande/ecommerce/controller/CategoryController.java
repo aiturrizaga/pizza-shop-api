@@ -3,10 +3,12 @@ package pe.edu.vallegrande.ecommerce.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.edu.vallegrande.ecommerce.model.dto.CategoryDTO;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Category;
 import pe.edu.vallegrande.ecommerce.service.CategoryService;
 
@@ -20,6 +22,12 @@ import java.util.Optional;
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    @Operation(summary = "Get all categories")
+    @GetMapping
+    public ResponseEntity<PageableDTO<Category>> getCategory(Pageable pageable) {
+        return ResponseEntity.ok(categoryService.findAll(pageable));
+    }
 
     @Operation(summary = "Get category by id")
     @GetMapping("/{id}")

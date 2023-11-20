@@ -1,8 +1,10 @@
 package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.ProductDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Product;
 import pe.edu.vallegrande.ecommerce.model.mapper.ProductMapper;
@@ -22,6 +24,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
+    }
+
+    @Override
+    public PageableDTO<Product> findAll(Pageable pageable) {
+        return productMapper.toPage(productRepository.findAll(pageable));
     }
 
     @Override

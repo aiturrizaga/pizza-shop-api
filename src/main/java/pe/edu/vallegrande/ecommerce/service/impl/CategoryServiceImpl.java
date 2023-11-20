@@ -1,9 +1,11 @@
 package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
 import pe.edu.vallegrande.ecommerce.model.dto.CategoryDTO;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Category;
 import pe.edu.vallegrande.ecommerce.model.mapper.CategoryMapper;
 import pe.edu.vallegrande.ecommerce.repository.CategoryRepository;
@@ -21,6 +23,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
+    }
+
+    @Override
+    public PageableDTO<Category> findAll(Pageable pageable) {
+        return categoryMapper.toPage(categoryRepository.findAll(pageable));
     }
 
     @Override
