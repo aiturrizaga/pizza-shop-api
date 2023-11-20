@@ -3,6 +3,7 @@ package pe.edu.vallegrande.ecommerce.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
 import pe.edu.vallegrande.ecommerce.model.dto.CategoryDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
@@ -27,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public PageableDTO<Category> findAll(Pageable pageable) {
-        return categoryMapper.toPage(categoryRepository.findAll(pageable));
+        return categoryMapper.toPage(categoryRepository.findAllByActive(true, pageable));
     }
 
     @Override
@@ -42,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new NotFoundException("Category not found"));
     }
 
+    @Transactional
     @Override
     public void disableById(Long id) {
         categoryRepository.disableById(id);

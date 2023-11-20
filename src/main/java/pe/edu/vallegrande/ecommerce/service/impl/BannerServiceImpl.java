@@ -2,6 +2,7 @@ package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
 import pe.edu.vallegrande.ecommerce.model.dto.BannerDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Banner;
@@ -44,6 +45,7 @@ public class BannerServiceImpl implements BannerService {
                 .orElseThrow(() -> new NotFoundException("Banner not found"));
     }
 
+    @Transactional
     @Override
     public void disableById(Long id) {
         bannerRepository.disableById(id);
