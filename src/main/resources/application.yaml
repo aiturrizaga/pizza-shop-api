@@ -7,7 +7,7 @@ spring:
   application:
     name: pizza-shop
   datasource:
-    url: ${DB_ECOMMERCE_URL}
-    username: ${DB_ECOMMERCE_USR}
-    password: ${DB_ECOMMERCE_PSW}
+    url: jdbc:postgresql://localhost:5432/pizza_shop
+    username: postgres
+    password: root
     driver-class-name: org.postgresql.Driver
