@@ -15,7 +15,7 @@ CREATE TABLE banner (
     data json  NOT NULL,
     start_date timestamp  NULL,
     end_date timestamp  NULL,
-    acrtive boolean  NOT NULL,
+    active boolean  NOT NULL,
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
 
