@@ -5,9 +5,9 @@ server:
 
 spring:
   application:
-    name: pizza-shop
+    name: vgshop
   datasource:
-    url: jdbc:postgresql://localhost:5432/pizza_shop
-    username: postgres
-    password: root
+    url: jdbc:postgresql://ep-fragrant-river-a43r676b-pooler.us-east-1.aws.neon.tech:5432/verceldb
+    username: default
+    password: DwvOtYTj3cP9
     driver-class-name: org.postgresql.Driver
