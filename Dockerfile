@@ -4,7 +4,7 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-RUN ./mvnw package -DskipTests
+RUN chmod +x mvnw && ./mvnw package -DskipTests
 
 FROM openjdk:17-slim
 WORKDIR /app
