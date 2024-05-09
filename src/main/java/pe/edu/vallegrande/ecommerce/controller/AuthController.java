@@ -29,4 +29,10 @@ public class AuthController {
     public ResponseEntity<VerifyEmailDTO> verifyEmail(@PathVariable UUID uuid) {
         return ResponseEntity.ok(authService.verifyEmail(uuid));
     }
+
+    @Operation(summary = "Register data")
+    @PostMapping("/register")
+    public ResponseEntity<Object> register(@RequestBody Object request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
 }
