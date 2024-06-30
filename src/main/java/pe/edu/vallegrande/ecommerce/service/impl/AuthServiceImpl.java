@@ -1,6 +1,7 @@
 package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
@@ -15,6 +16,7 @@ import pe.edu.vallegrande.ecommerce.service.AuthService;
 import java.util.UUID;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
@@ -41,5 +43,11 @@ public class AuthServiceImpl implements AuthService {
                             .build();
                 })
                 .orElseThrow(() -> new UnverifiedEmailException("Email has not been verified"));
+    }
+
+    @Override
+    public Object register(Object request) {
+        log.info("Request object: {}", request);
+        return request;
     }
 }

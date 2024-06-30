@@ -10,4 +10,6 @@ public interface AuthService {
     PersonResponseDTO login(LoginDTO dto);
 
     VerifyEmailDTO verifyEmail(UUID uuid);
+
+    Object register(Object request);
 }
