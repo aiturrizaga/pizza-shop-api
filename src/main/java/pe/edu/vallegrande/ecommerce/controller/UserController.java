@@ -3,11 +3,14 @@ package pe.edu.vallegrande.ecommerce.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.PersonDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.PersonResponseDTO;
+import pe.edu.vallegrande.ecommerce.model.entity.Person;
 import pe.edu.vallegrande.ecommerce.service.PersonService;
 
 import java.net.URI;
@@ -19,6 +22,12 @@ import java.net.URI;
 public class UserController {
 
     private final PersonService personService;
+
+    @Operation(summary = "Get all users")
+    @GetMapping
+    public ResponseEntity<PageableDTO<Person>> getUsers(Pageable pageable) {
+        return ResponseEntity.ok(personService.findAll(pageable));
+    }
 
     @Operation(summary = "Get user by id")
     @GetMapping("/{id}")

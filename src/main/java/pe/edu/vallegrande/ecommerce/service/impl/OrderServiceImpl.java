@@ -1,8 +1,10 @@
 package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pe.edu.vallegrande.ecommerce.model.dto.OrderDTO;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Order;
 import pe.edu.vallegrande.ecommerce.model.entity.OrderLine;
 import pe.edu.vallegrande.ecommerce.model.mapper.OrderMapper;
@@ -51,6 +53,11 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderLines(orderLines);
 
         return orderRepository.save(order);
+    }
+
+    @Override
+    public PageableDTO<Order> findAll(Pageable pageable) {
+        return orderMapper.toPage(orderRepository.findAll(pageable));
     }
 
     @Override

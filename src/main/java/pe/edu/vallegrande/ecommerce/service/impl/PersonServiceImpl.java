@@ -1,9 +1,11 @@
 package pe.edu.vallegrande.ecommerce.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.vallegrande.ecommerce.exception.NotFoundException;
+import pe.edu.vallegrande.ecommerce.model.dto.PageableDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.PersonDTO;
 import pe.edu.vallegrande.ecommerce.model.dto.PersonResponseDTO;
 import pe.edu.vallegrande.ecommerce.model.entity.Person;
@@ -23,6 +25,11 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findById(id)
                 .map(personMapper::toResponse)
                 .orElseThrow();
+    }
+
+    @Override
+    public PageableDTO<Person> findAll(Pageable pageable) {
+        return personMapper.toPage(personRepository.findAll(pageable));
     }
 
     @Override

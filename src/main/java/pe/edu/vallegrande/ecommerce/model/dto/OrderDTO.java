@@ -32,7 +32,7 @@ public class OrderDTO {
     private BigDecimal longitude;
     @NotNull
     @Size(max = 20)
-    private String state;
+    private String state; // IN_PROGRESS - ON_WAY - DELIVERED - CANCELLED
 
     private Set<OrderItemDTO> items;
 
